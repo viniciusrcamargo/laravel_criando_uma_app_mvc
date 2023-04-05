@@ -20,10 +20,10 @@ class SeriesController extends Controller
 
     public function store(Request $request)
     {
-        $nomeSerie = $request->input('nome');
-        $serie = new Serie();
-        $serie->nome = $nomeSerie;
-        $serie->save();
+        //dd($request->all()); dump and die
+        //Serie::create($request->only('nome')); busca somente os campos da requisição que for informado
+        //Serie::create($request->except('_token')); busca tudo exceto o informado
+        Serie::create($request->all());
 
         return redirect('series');
     }
