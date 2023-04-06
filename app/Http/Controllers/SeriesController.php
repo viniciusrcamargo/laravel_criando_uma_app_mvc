@@ -25,6 +25,11 @@ class SeriesController extends Controller
         //Serie::create($request->except('_token')); busca tudo exceto o informado
         Serie::create($request->all());
 
-        return redirect('series');
+        return to_route('series.index');
+    }
+
+    public function destroy(Request $request)
+    {
+
     }
 }
