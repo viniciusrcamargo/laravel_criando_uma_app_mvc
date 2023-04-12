@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         //$series = Serie::all();
         $series = Serie::query()->orderBy('nome')->get();
-
-        return view('series.index')->with('series', $series);
+        $mensagemSucesso = $request->session()->get('mensagem.sucesso');
+        //dd($mensagemSucesso);
+        return view('series.index')->with('series', $series)->with('mensagemSucesso', $mensagemSucesso);
     }
 
     public function create(){
@@ -24,7 +25,8 @@ class SeriesController extends Controller
         //Serie::create($request->only('nome')); busca somente os campos da requisição que for informado
         //Serie::create($request->except('_token')); busca tudo exceto o informado
         Serie::create($request->all());
-
+        $request->session()->flash('mensagem.sucesso', 'Série adicionada com sucesso');
+        //dd($request->session());
         return to_route('series.index');
     }
 
@@ -32,6 +34,7 @@ class SeriesController extends Controller
     {
         //dd($request->route());
         Serie::destroy($request->series);
+        $request->session()->flash('mensagem.sucesso', 'Série removida com sucesso');
 
         return to_route('series.index');
     }
