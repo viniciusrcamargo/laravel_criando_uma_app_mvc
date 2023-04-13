@@ -24,17 +24,16 @@ class SeriesController extends Controller
         //dd($request->all()); dump and die
         //Serie::create($request->only('nome')); busca somente os campos da requisição que for informado
         //Serie::create($request->except('_token')); busca tudo exceto o informado
-        Serie::create($request->all());
-        $request->session()->flash('mensagem.sucesso', 'Série adicionada com sucesso');
+        $serie = Serie::create($request->all());
+        $request->session()->flash('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
         //dd($request->session());
         return to_route('series.index');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Serie $series, Request $request)
     {
-        //dd($request->route());
-        Serie::destroy($request->series);
-        $request->session()->flash('mensagem.sucesso', 'Série removida com sucesso');
+        $series->delete();
+        $request->session()->flash('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso'");
 
         return to_route('series.index');
     }
