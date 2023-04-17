@@ -21,6 +21,9 @@ class SeriesController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'nome' => ['required', 'min:3']
+        ]);
         //dd($request->all()); dump and die
         //Serie::create($request->only('nome')); busca somente os campos da requisição que for informado
         //Serie::create($request->except('_token')); busca tudo exceto o informado
