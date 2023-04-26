@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Season extends Model
 {
     use HasFactory;
+    protected $fillable = ['number'];
 
     public function series()
     {
-        return $this->belongsTo(Serie::class);
+        return $this->belongsTo(Series::class);
     }
 
-    public function episode()
+    public function episodes()
     {
         return $this->hasMany(Episode::class);
     }
