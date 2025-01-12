@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
-use App\Models\Episode;
-use App\Models\Season;
 use App\Models\Series;
 use Illuminate\Http\Request;
 use App\Repositories\SeriesRepository;
