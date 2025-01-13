@@ -9,6 +9,11 @@ use App\Repositories\SeriesRepository;
 
 class SeriesController extends Controller
 {
+    public function __construct(SeriesRepository $repository)
+    {
+
+    }
+
     public function index(Request $request)
     {
         $series = Series::all();
@@ -25,7 +30,7 @@ class SeriesController extends Controller
 
     public function store(SeriesFormRequest $request, SeriesRepository $repository)
     {
-        $serie = $repository->add($request);
+        $serie = $this->repository->add($request);
 
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
